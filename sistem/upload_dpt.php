@@ -117,12 +117,12 @@ if(isset($_POST['simpan'])) {
                         <th>Waktu</th>
                       </tr>
                       <?php
-                      $data_dpt = mysqli_query($koneksi,"SELECT * FROM tbl_dpt WHERE status='(Sudah memilih)'");
+                      $data_dpt = mysqli_query($koneksi,"SELECT * FROM tabel_dpt WHERE waktu='Sudah'");
                       while($d = mysqli_fetch_array($data_dpt)){
                         ?>
                         <tr>
-                          <td><?php echo $d['nim']; ?></td>
-                          <td><?php echo $d['nama_mhs']; ?></td>
+                          <td><?php echo $d['username']; ?></td>
+                          <td><?php echo $d['nama']; ?></td>
                           <td><mark style="background-color: #00cc00; color: white;"><b><?php echo $d['status']; ?></b></mark></td>
                           <td><?php echo $d['waktu']; ?></td>
                         </tr>

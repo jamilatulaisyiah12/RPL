@@ -1,4 +1,5 @@
 ﻿<?php
+// coba
 session_start();
 if (!isset($_SESSION["login"])) {
   header("location:../index.php");
@@ -111,11 +112,20 @@ include '../koneksi.php';
               <li>
                 <a href="?page=profil-kandidat">Profil Kandidat</a>
               </li>
-              <li>
-                <a href="?page=vote">Vote</a>
+              <?php
+              $dataTemp = mysqli_query($koneksi, "SELECT waktu FROM tabel_dpt WHERE username='$_SESSION[username]'");
+              $data = mysqli_fetch_array($dataTemp);
+              if (@$data['waktu'] == "Sudah") {?>
+                <li>
+                <a style="pointer-events: none; background-color:lightgray;" href="?page=vote">Vote</a>
               </li>
+              <?php } else{?>
+                <li>
+                  <a href="?page=vote">Vote</a>
+                </li>
+              <?php }?>
               <li>
-                <a href="?page=grafik">Grafik</a>
+                <a href="?page=hasil-suara">Grafik</a>
               </li>
             <?php } ?>
 
@@ -157,6 +167,12 @@ include '../koneksi.php';
     <?php } elseif ($paramUrl == 'logout') {
       require_once('../logout.php');
     ?>
+    <?php } elseif ($paramUrl == 'vote') {
+      require_once('vote_paslon.php');
+    ?>
+    <?php } elseif ($paramUrl == 'hasil-suara') {
+      require_once('hasil-suara.php');
+    ?>
     <?php } else { ?>
       <div id="page-wrapper" class="pt-5">
         <!-- <div class="container bg-primary"><p>sadas</p></div> -->
@@ -184,7 +200,14 @@ include '../koneksi.php';
                   }
                   $dataSiswa = mysqli_fetch_array($q);
                   ?>
-                </strong><b style="font-size: 18px;"><?=$dataSiswa['Nama_siswa'] ?></b> DI APLIKASI E-VOTE SMK SIDING PURI
+                  <?php
+                  if($_SESSION['level'] == 'admin'){ ?>
+                  </strong><b style="font-size: 18px;"><?=$dataSiswa['nama'] ?></b> DI APLIKASI E-VOTE SMK SIDING PURI
+                  <?php } ?>
+                  <?php
+                  if($_SESSION['level'] != 'admin'){ ?>
+                  </strong><b style="font-size: 18px;"><?=$dataSiswa['Nama_siswa'] ?></b> DI APLIKASI E-VOTE SMK SIDING PURI
+                  <?php } ?>
               </div>
             </div>
           </div>
