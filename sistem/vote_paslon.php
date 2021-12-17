@@ -27,7 +27,9 @@ include '../koneksi.php';
                         
                             <div class="col-lg-5 " style="background-color: red ;">
                                 <h3>Kandidat <?=$ind ?></h3>
-                                <div class=""><?=$data['nm_paslon_ketua'] ?></div>
+                                <div class="">
+                                    <img src="foto/<?=$data['gambar1']?>" alt="">
+                                </div>
                                 <a class="btn btn-info" href="simpansuara.php?iddpt=<?=$_SESSION['username']?>&idpaslon=<?=$data['no_urut']?>">PILIH</a>
                             </div>
                             <div class="col-lg-1"></div>

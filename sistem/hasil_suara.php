@@ -98,26 +98,19 @@ if(isset($_POST['simpan'])) {
           var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-              labels: ["PASLON 1", "PASLON 2", "PASLON 3", "PASLON 4"],
+              labels: ["PASLON 1", "PASLON 2"],
               datasets: [{
                 label: 'Jumlah Suara',
                 data: [
                 <?php 
-                $paslon1 = mysqli_query($koneksi,"select * from tbl_paslon where nomor_paslon='1'");
+                $paslon1 = mysqli_query($koneksi,"select * from tabel_rekap where no_urutpaslon='1'");
                 echo mysqli_num_rows($paslon1);
                 ?>, 
                 <?php 
-                $paslon2 = mysqli_query($koneksi,"select * from tbl_paslon where nomor_paslon='2'");
+                $paslon2 = mysqli_query($koneksi,"select * from tabel_rekap where no_urutpaslon='2'");
                 echo mysqli_num_rows($paslon2);
-                ?>, 
-                <?php 
-                $paslon3 = mysqli_query($koneksi,"select * from tbl_paslon where nomor_paslon='3'");
-                echo mysqli_num_rows($paslon3);
-                ?>,
-                <?php 
-                $paslon4 = mysqli_query($koneksi,"select * from tbl_paslon where nomor_paslon='4'");
-                echo mysqli_num_rows($paslon4);
                 ?>
+               
                 ],
                 backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

@@ -14,7 +14,7 @@ unlink("foto/".$gambar2);
 
 mysqli_query($koneksi,"DELETE FROM data_paslon WHERE no_urut='$no_urut'");
 
-header("location:input_data_paslon.php");
+header("location:index.php?page=datapaslon");
 
 }
 ?>

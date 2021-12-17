@@ -9,8 +9,17 @@ include '../koneksi.php';
 if (isset($_POST['simpan'])) {
   $nim_ketua = mysqli_real_escape_string($koneksi, $_POST['nim_ketua']);
   $nm_paslon_ketua = mysqli_real_escape_string($koneksi, $_POST['nm_paslon_ketua']);
+  $ttl_ketua =  mysqli_real_escape_string($koneksi, $_POST['ttl_ketua']);
+  $jk_ketua =  mysqli_real_escape_string($koneksi, $_POST['jk_ketua']);
+  $kls_ketua =  mysqli_real_escape_string($koneksi, $_POST['kls_ketua']);
+  
+  
   $nim_wakil = mysqli_real_escape_string($koneksi, $_POST['nim_wakil']);
   $nm_paslon_wakil = mysqli_real_escape_string($koneksi, $_POST['nm_paslon_wakil']);
+  $ttl_wakil =  mysqli_real_escape_string($koneksi, $_POST['ttl_wakil']);
+  $jk_wakil =  mysqli_real_escape_string($koneksi, $_POST['jk_wakil']);
+  $kls_wakil =  mysqli_real_escape_string($koneksi, $_POST['kls_wakil']);
+
   $no_urut = mysqli_real_escape_string($koneksi, $_POST['no_urut']);
 
   if ($_POST['simpan']) {
@@ -24,23 +33,27 @@ if (isset($_POST['simpan'])) {
       if ($ukuran <= 2000000) {
         move_uploaded_file($file_tmp, 'foto/' . $gambar1);
         $query = mysqli_query($koneksi, "INSERT INTO data_paslon VALUES(NULL, '$gambar1')");
-        $gambar2 = $_FILES['gambar2']['name'];
-        $x = explode('.', $gambar2);
-        $ekstensi = strtolower(end($x));
-        $ukuran = $_FILES['gambar2']['size'];
-        $file_tmp = $_FILES['gambar2']['tmp_name'];
-        if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
-          if ($ukuran <= 2000000) {
-            move_uploaded_file($file_tmp, 'foto/' . $gambar2);
-            $query = mysqli_query($koneksi, "INSERT INTO data_paslon VALUES(NULL, '$gambar2')");
-          }
-        }
+        // $gambar2 = $_FILES['gambar2']['name'];
+        // $x = explode('.', $gambar2);
+        // $ekstensi = strtolower(end($x));
+        // $ukuran = $_FILES['gambar2']['size'];
+        // $file_tmp = $_FILES['gambar2']['tmp_name'];
+        // if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+        //   if ($ukuran <= 2000000) {
+        //     move_uploaded_file($file_tmp, 'foto/' . $gambar2);
+        //     $query = mysqli_query($koneksi, "INSERT INTO data_paslon VALUES(NULL, '$gambar2')");
+        //   }
+        // }
       }
     }
   }
 
-  mysqli_query($koneksi, "INSERT INTO data_paslon(id, nim_ketua, nm_paslon_ketua, gambar1, nim_wakil, nm_paslon_wakil, gambar2, no_urut)
-    VALUES ('','$nim_ketua','$nm_paslon_ketua','$gambar1','$nim_wakil','$nm_paslon_wakil','$gambar2','$no_urut')");
+  mysqli_query($koneksi, "INSERT INTO data_paslon(id, nim_ketua, nm_paslon_ketua, gambar1, nim_wakil, nm_paslon_wakil, no_urut)
+    VALUES ('','$nim_ketua','$nm_paslon_ketua','$gambar1','$nim_wakil','$nm_paslon_wakil','$no_urut')");
+    mysqli_query($koneksi, "INSERT INTO data_siswa(NIS, Nama_siswa, jenis_kelamin, Kelas, Tgl_lahir) VALUES ('$nim_ketua', '$nm_paslon_ketua', '$jk_ketua', '$kls_ketua', '$ttl_ketua')");
+    mysqli_query($koneksi, "INSERT INTO data_siswa(NIS, Nama_siswa, jenis_kelamin, Kelas, Tgl_lahir) VALUES ('$nim_wakil', '$nm_paslon_wakil', '$jk_wakil', '$kls_wakil', '$ttl_wakil')");
+    mysqli_query($koneksi, "INSERT INTO tabel_dpt(username, nama, status, waktu) VALUES ('$nim_ketua', '$nm_paslon_ketua', 'Pemilih', 'Belum memilih')");
+    mysqli_query($koneksi, "INSERT INTO tabel_dpt(username, nama, status, waktu) VALUES ('$nim_wakil', '$nm_paslon_wakil', 'Pemilih', 'Belum memilih')");
 
   // echo "<script>window.alert('Berhasil')
   // window.location='input_data_paslon.php'</script>";
@@ -84,10 +97,24 @@ if (isset($_POST['simpan'])) {
                     <label>Nama Calon</label>
                     <input type="text" name="nm_paslon_ketua" required="required" autocomplete="off" class="form-control">
                   </div>
+
                   <div class="form-group">
-                    <label>foto ketua</label>
-                    <input type="file" name="gambar1" required="required" class="form-control-file">
+                    <label>TTL</label>
+                    <input type="text" name="ttl_ketua" required="required" class="form-control">
                   </div>
+                  <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <select name="jk_ketua" >
+                      <option value="Laki-laki">Laki-Laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Kelas</label>
+                    <input type="text" name="kls_ketua" required="required" autocomplete="off" class="form-control">
+                  </div>
+
+                  
                   <div class="form-group">
                     <label>NIM wakil</label>
                     <input type="text" name="nim_wakil" required="required" class="form-control">
@@ -96,9 +123,26 @@ if (isset($_POST['simpan'])) {
                     <label>Nama wakil</label>
                     <input type="text" name="nm_paslon_wakil" required="required" autocomplete="off" class="form-control">
                   </div>
+
                   <div class="form-group">
-                    <label>foto wakil</label>
-                    <input type="file" name="gambar2" required="required" class="form-control-file">
+                    <label>TTL</label>
+                    <input type="text" name="ttl_wakil" required="required" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <select name="jk_wakil" >
+                      <option value="Laki-laki">Laki-Laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Kelas</label>
+                    <input type="text" name="kls_wakil" required="required" autocomplete="off" class="form-control">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Foto Paslon</label>
+                    <input type="file" name="gambar1" required="required" class="form-control-file">
                   </div>
                   <div class="form-group">
                     <label>No paslon</label>
