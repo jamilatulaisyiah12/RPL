@@ -12,6 +12,8 @@ if (isset($_POST['simpan'])) {
   $ttl_ketua =  mysqli_real_escape_string($koneksi, $_POST['ttl_ketua']);
   $jk_ketua =  mysqli_real_escape_string($koneksi, $_POST['jk_ketua']);
   $kls_ketua =  mysqli_real_escape_string($koneksi, $_POST['kls_ketua']);
+  $visimisi =  mysqli_real_escape_string($koneksi, $_POST['visimisi']);
+  // $misi =  mysqli_real_escape_string($koneksi, $_POST['misi']);
   
   
   $nim_wakil = mysqli_real_escape_string($koneksi, $_POST['nim_wakil']);
@@ -48,8 +50,11 @@ if (isset($_POST['simpan'])) {
     }
   }
 
-  mysqli_query($koneksi, "INSERT INTO data_paslon(id, nim_ketua, nm_paslon_ketua, gambar1, nim_wakil, nm_paslon_wakil, no_urut)
-    VALUES ('','$nim_ketua','$nm_paslon_ketua','$gambar1','$nim_wakil','$nm_paslon_wakil','$no_urut')");
+  mysqli_query($koneksi, "INSERT INTO data_paslon(id, nim_ketua, nm_paslon_ketua, gambar1, nim_wakil, nm_paslon_wakil, no_urut, visimisi)
+    VALUES ('','$nim_ketua','$nm_paslon_ketua','$gambar1','$nim_wakil','$nm_paslon_wakil','$no_urut', '$visimisi')");
+    // echo "INSERT INTO data_paslon(id, nim_ketua, nm_paslon_ketua, gambar1, nim_wakil, nm_paslon_wakil, no_urut, visimisi)
+    // VALUES ('','$nim_ketua','$nm_paslon_ketua','$gambar1','$nim_wakil','$nm_paslon_wakil','$no_urut', '$visimisi')";
+    // die();
     mysqli_query($koneksi, "INSERT INTO data_siswa(NIS, Nama_siswa, jenis_kelamin, Kelas, Tgl_lahir) VALUES ('$nim_ketua', '$nm_paslon_ketua', '$jk_ketua', '$kls_ketua', '$ttl_ketua')");
     mysqli_query($koneksi, "INSERT INTO data_siswa(NIS, Nama_siswa, jenis_kelamin, Kelas, Tgl_lahir) VALUES ('$nim_wakil', '$nm_paslon_wakil', '$jk_wakil', '$kls_wakil', '$ttl_wakil')");
     mysqli_query($koneksi, "INSERT INTO tabel_dpt(username, nama, status, waktu) VALUES ('$nim_ketua', '$nm_paslon_ketua', 'Pemilih', 'Belum memilih')");
@@ -148,6 +153,12 @@ if (isset($_POST['simpan'])) {
                     <label>No paslon</label>
                     <input type="text" name="no_urut" required="required" class="form-control">
                   </div>
+                  <div class="form-group">
+                    <label>Visi Misi</label>
+                    <!-- <input type="text" name="no_urut" required="required" class="form-control"> -->
+                    <textarea name="visimisi" cols="50" require></textarea>
+                  </div>
+                  
                   <div class="form-group">
                     <input type="submit" class="btn btn-success" name="simpan" value="Input" class="form-control">
                   </div>

@@ -15,7 +15,7 @@ include '../koneksi.php';
         <div id="page-inner">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <div class="bg-info">
+                    <div >
                     <div class="row">
                         <?php
                         $dataTemp = mysqli_query($koneksi, "SELECT * FROM data_paslon");
@@ -25,7 +25,7 @@ include '../koneksi.php';
                             if ($breaker != 2) {
                         ?>
                         
-                            <div class="col-lg-5 " style="background-color: red ;">
+                            <div class="col-lg-5 bg-info">
                                 <h3>Kandidat <?=$ind ?></h3>
                                 <div class="">
                                     <img src="foto/<?=$data['gambar1']?>" alt="">
@@ -38,7 +38,7 @@ include '../koneksi.php';
                             </div>
                             <br><br>
                             <div class="row">
-                            <div class="col-lg-5 " style="background-color: red ;">
+                            <div class="col-lg-5 bg-info ">
                                 <h3>Kandidat <?=$ind ?></h3>
                                 <div class=""><?=$data['nm_paslon_ketua'] ?></div>
                                 <a class="btn" href="">PILIH</a>

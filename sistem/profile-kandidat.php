@@ -14,7 +14,7 @@ include '../koneksi.php';
         <div id="page-inner">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2> profil kandidat ketua dan wakil ketua osis</h2>
+                    <h2> Profil Kandidat Ketua dan Wakil Ketua OSIS SMK SIDINGPURI </h2>
                 </div>
             </div>
             <div class="row">
@@ -32,18 +32,45 @@ include '../koneksi.php';
                                     <div class="row">
                                         <div class="col-xs-12 col-md-3 text-center">
                                             <img height="150" width="100" src="foto/<?= $data['gambar1'] ?>"></img>
-                                            <p><b>Calon Ketua <?=$ind ?></b></p>
+                                            <p><b>Calon Ketua dan Wakil <?=$ind ?></b></p>
                                         </div>
                                         <div class="col-xs-6 col-md-9">
                                             <h3>Kandidat <?= $ind ?></h3>
-                                            <h4>Visi Misi</h4>
+                                            <p><?=$data['visimisi']?></p>
+                                            
                                             <br><br>
-                                            <h3>Data Diri</h3>
+                                            <h3>Data Calon Ketua</h3>
                                             <table>
+                                                <?php
+                                                $dataTemp = mysqli_query($koneksi, "SELECT * FROM data_siswa WHERE NIS='$data[nim_ketua]'");
+                                                // echo "SELECT * FROM data_siswa WHERE NIS='$data[nim_ketua]'";
+                                                // die();
+                                                $dataKetua = mysqli_fetch_array($dataTemp);
+                                                ?>
                                                 <tr>
                                                     <td>Nama</td>
                                                     <td>:</td>
-                                                    <td><?= $data['nm_paslon_ketua'] ?></td>
+                                                    <td><?= $dataKetua['Nama_siswa'] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>NIS</td>
+                                                    <td>:</td>
+                                                    <td><?= $dataKetua['NIS'] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TTL</td>
+                                                    <td>:</td>
+                                                    <td><?= $dataKetua['Tgl_lahir'] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jenis Kelamin</td>
+                                                    <td>:</td>
+                                                    <td><?= $dataKetua['jenis_kelamin'] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kelas</td>
+                                                    <td>:</td>
+                                                    <td><?= $dataKetua['Kelas'] ?></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -53,16 +80,38 @@ include '../koneksi.php';
                                     <div class="row">
                                         <br>
                                         <div class="col-xs-12 col-md-3 text-center">
-                                            <img height="150" width="100" src="foto/<?= $data['gambar1'] ?>"></img>
-                                            <p><b>Calon Wakil Ketua <?=$ind ?></b></p>
                                         </div>
                                         <div class="col-xs-6 col-md-9">
-                                            <h3>Data Diri</h3>
+                                            <h3>Data Wakil Ketua</h3>
                                             <table>
+                                                <?php
+                                                $dataTemp = mysqli_query($koneksi, "SELECT * FROM data_siswa WHERE NIS='$data[nim_wakil]'");
+                                                $dataWakil = mysqli_fetch_array($dataTemp);
+                                                ?>
                                                 <tr>
                                                     <td>Nama</td>
                                                     <td>:</td>
-                                                    <td><?= $data['nm_paslon_wakil'] ?></td>
+                                                    <td><?= $dataWakil['Nama_siswa'] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>NIS</td>
+                                                    <td>:</td>
+                                                    <td><?= $dataWakil['NIS'] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TTL</td>
+                                                    <td>:</td>
+                                                    <td><?= $dataWakil['Tgl_lahir'] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jenis Kelamin</td>
+                                                    <td>:</td>
+                                                    <td><?= $dataWakil['jenis_kelamin'] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kelas</td>
+                                                    <td>:</td>
+                                                    <td><?= $dataWakil['Kelas'] ?></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -71,8 +120,7 @@ include '../koneksi.php';
                                 </div>
                             </div>
                         </div>
-                    <?php $ind++;
-                    } ?>
+                    <?php $ind++;} ?>
                 </div>
             </div>
         </div>

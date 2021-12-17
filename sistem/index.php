@@ -27,7 +27,7 @@ include '../koneksi.php';
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
   <style>
     body {
-      background: url('foto/bg-apps.jpg') no-repeat center center fixed;
+      background: url('foto/bg-1.jpg') no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;

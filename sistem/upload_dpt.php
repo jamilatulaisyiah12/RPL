@@ -98,7 +98,7 @@ if(isset($_POST['simpan'])) {
                   <td><?php echo $d['username']; ?></td>
                   <td style="text-transform: capitalize;"><?php echo $d['nama']; ?></td>
                   <td><mark style="background-color: yellow;"><b><?php echo $d['status']; ?></b></mark></td>
-                  <td><a class="btn btn-danger btn-circle" onclick="return confirm('Yakin hapus data ini !!!')" href="hapus.php?no_urut=<?php echo $d['username']; ?>">Hapus</a>
+                  <td><a class="btn btn-danger btn-circle" onclick="return confirm('Yakin hapus data ini !!!')" href="hapus_siswa.php?username=<?=$d['username']; ?>">Hapus</a>
                   <?php } ?>
                 </table>
               </div>
